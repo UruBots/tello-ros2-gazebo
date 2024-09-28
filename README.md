@@ -54,12 +54,5 @@ If you run into the **No namespace found** error re-set `GAZEBO_MODEL_PATH`:
     ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/drone1
 
 
-#### Simulation on Docker
-Go to http://localhost:6080
-Open a terminal and type 
-```
-cd /home/ubuntu/ros_ws
-source install/setup.bash
-ros2 launch tello_gazebo simple_launch.py
-```
+
 
