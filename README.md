@@ -78,13 +78,15 @@ Open a terminal and type
 cd /home/ubuntu/ros_ws
 source install/setup.bash
 ros2 launch tello_gazebo simple_launch.py
-ros2 run gazebo_ros spawn_entity.py -file /home/ubuntu/ros_ws/install/tello_description/share/tello_description/urdf/tello_1.urdf -entity tello
+ros2 run gazebo_ros spawn_entity.py -file /home/ubuntu/ros_ws/install/tello_description/share/tello_description/urdf/tello_1.urdf -entity drone1
 ```
 Run teleop to control the drone:
 
 ```
 cd /home/ubuntu/ros_ws
 source install/setup.bash
+ros2 service call /drone1/tello_action tello_msgs/TelloAction "{cmd: 'takeoff'}"
 ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r __ns:=/drone1
+ros2 service call /drone1/tello_action tello_msgs/TelloAction "{cmd: 'land'}"
 ```
 
