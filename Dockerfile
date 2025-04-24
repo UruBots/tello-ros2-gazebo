@@ -1,19 +1,20 @@
-FROM sbarcelona11/ros2-desktop-vnc:humble
+FROM osrf/ros:humble-desktop-full
 
 WORKDIR /home/ubuntu/ros_ws
-ENV QT_X11_NO_MITSHM=1
+# ENV QT_X11_NO_MITSHM=1
 
 # Install dependencies
 RUN apt-get update && apt-get install -y \
+    python3-pip \
     ros-humble-cv-bridge \
     ros-humble-camera-calibration-parsers \
     libasio-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install PYTHON dependencies
-RUN pip3 install transformations
+# RUN pip3 install transformations torch torchvision torchaudio ultralytics
 # Install YoloV8
-RUN pip3 install opencv-python torch torchvision torchaudio ultralytics
+RUN pip3 install opencv-python
 # Create workspace and Colcon build
 RUN /bin/bash -c "source /opt/ros/humble/setup.bash && \
                   mkdir -p /home/ubuntu/ros_ws/src && cd /home/ubuntu/ros_ws/ && \
@@ -26,7 +27,7 @@ RUN /bin/bash -c "source /opt/ros/humble/setup.bash && \
 
 # Install interbotix_ros_core
 RUN /bin/bash -c "cd /home/ubuntu/ros_ws/src && \
-                  git clone https://github.com/Los-UruBots-del-Norte/tello-ros2-gazebo.git && \
+                  git clone https://github.com/Urubots/tello-ros2-gazebo.git && \
                   cd tello-ros2-gazebo"
 # Build
 RUN /bin/bash -c "source /home/ubuntu/ros_ws/install/setup.bash && \

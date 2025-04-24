@@ -3,8 +3,16 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    env_file:
-      - .env
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - ~/.Xauthority:/root/.Xauthority
     ports:
       - 6080:80
       - 5900:5900
+    environment:
+      - DISPLAY=$DISPLAY
+      - LIBGL_ALWAYS_SOFTWARE=1 
+    env_file:
+      - .env
+    command: bash -c "source /opt/ros/humble/setup.bash && source /home/ubuntu/ros_ws/install/setup.bash && export GAZEBO_MODEL_PATH=${PWD}/install/tello_gazebo/share/tello_gazebo/models && source /usr/share/gazebo/setup.sh && ros2 launch tello_gazebo simple_launch.py"
+    # command: bash -c 'tail -f /dev/null'
