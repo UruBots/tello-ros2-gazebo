@@ -1,0 +1,426 @@
+<?xml version="1.0" ?>
+<!--
+  FIRA Air - Electrical Tower Model
+  Target 2 for insulator inspection mission
+  2m high pylon with 3 insulators, each with QR codes
+-->
+<sdf version="1.9">
+  <model name="electrical_tower">
+    <static>true</static>
+    <link name="link">
+      
+      <!-- Tower base (concrete foundation) -->
+      <visual name="base">
+        <pose>0 0 0.05 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.8 0.8 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0.5 0.5 1</ambient>
+          <diffuse>0.6 0.6 0.6 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Tower leg 1 (front-left) -->
+      <visual name="leg_fl">
+        <pose>-0.25 -0.25 1 0 0.05 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.08 1.9</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      
+      <!-- Tower leg 2 (front-right) -->
+      <visual name="leg_fr">
+        <pose>0.25 -0.25 1 0 -0.05 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.08 1.9</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      
+      <!-- Tower leg 3 (back-left) -->
+      <visual name="leg_bl">
+        <pose>-0.25 0.25 1 0.05 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.08 1.9</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      
+      <!-- Tower leg 4 (back-right) -->
+      <visual name="leg_br">
+        <pose>0.25 0.25 1 -0.05 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.08 1.9</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+          <specular>0.5 0.5 0.5 1</specular>
+        </material>
+      </visual>
+      
+      <!-- Cross braces lower -->
+      <visual name="brace_low_1">
+        <pose>0 -0.25 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.5 0.04 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="brace_low_2">
+        <pose>0 0.25 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.5 0.04 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Cross braces upper -->
+      <visual name="brace_up_1">
+        <pose>0 -0.2 1.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.04 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="brace_up_2">
+        <pose>0 0.2 1.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.04 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Top cross beam (holds insulators) -->
+      <visual name="top_beam">
+        <pose>0 0 1.9 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.2 0.1 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.35 1</ambient>
+          <diffuse>0.4 0.4 0.45 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- ============================================ -->
+      <!-- INSULATORS WITH QR CODES -->
+      <!-- ============================================ -->
+      
+      <!-- Insulator 1 (left) -->
+      <visual name="insulator_1_body">
+        <pose>-0.4 0 1.7 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04</radius>
+            <length>0.3</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.4 0.2 1</ambient>
+          <diffuse>0.2 0.5 0.3 1</diffuse>
+          <specular>0.3 0.4 0.3 1</specular>
+        </material>
+      </visual>
+      
+      <visual name="insulator_1_ring1">
+        <pose>-0.4 0 1.8 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.06</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.3 0.2 1</ambient>
+          <diffuse>0.15 0.4 0.25 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="insulator_1_ring2">
+        <pose>-0.4 0 1.65 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.06</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.3 0.2 1</ambient>
+          <diffuse>0.15 0.4 0.25 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- QR code on insulator 1 -->
+      <visual name="qr_insulator_1_bg">
+        <pose>-0.4 0.05 1.7 1.5707 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="qr_insulator_1_pattern">
+        <pose>-0.4 0.051 1.7 1.5707 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.15 0.15 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Insulator 2 (center) -->
+      <visual name="insulator_2_body">
+        <pose>0 0 1.7 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04</radius>
+            <length>0.3</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.4 0.2 1</ambient>
+          <diffuse>0.2 0.5 0.3 1</diffuse>
+          <specular>0.3 0.4 0.3 1</specular>
+        </material>
+      </visual>
+      
+      <visual name="insulator_2_ring1">
+        <pose>0 0 1.8 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.06</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.3 0.2 1</ambient>
+          <diffuse>0.15 0.4 0.25 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="insulator_2_ring2">
+        <pose>0 0 1.65 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.06</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.3 0.2 1</ambient>
+          <diffuse>0.15 0.4 0.25 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- QR code on insulator 2 -->
+      <visual name="qr_insulator_2_bg">
+        <pose>0 0.05 1.7 1.5707 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="qr_insulator_2_pattern">
+        <pose>0 0.051 1.7 1.5707 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.15 0.15 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Insulator 3 (right) -->
+      <visual name="insulator_3_body">
+        <pose>0.4 0 1.7 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.04</radius>
+            <length>0.3</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.4 0.2 1</ambient>
+          <diffuse>0.2 0.5 0.3 1</diffuse>
+          <specular>0.3 0.4 0.3 1</specular>
+        </material>
+      </visual>
+      
+      <visual name="insulator_3_ring1">
+        <pose>0.4 0 1.8 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.06</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.3 0.2 1</ambient>
+          <diffuse>0.15 0.4 0.25 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="insulator_3_ring2">
+        <pose>0.4 0 1.65 0 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.06</radius>
+            <length>0.02</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.3 0.2 1</ambient>
+          <diffuse>0.15 0.4 0.25 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- QR code on insulator 3 -->
+      <visual name="qr_insulator_3_bg">
+        <pose>0.4 0.05 1.7 1.5707 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="qr_insulator_3_pattern">
+        <pose>0.4 0.051 1.7 1.5707 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.15 0.15 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Power lines (visual only) -->
+      <visual name="wire_1">
+        <pose>-0.4 1 1.85 1.5707 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01</radius>
+            <length>2</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="wire_2">
+        <pose>0 1 1.85 1.5707 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01</radius>
+            <length>2</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="wire_3">
+        <pose>0.4 1 1.85 1.5707 0 0</pose>
+        <geometry>
+          <cylinder>
+            <radius>0.01</radius>
+            <length>2</length>
+          </cylinder>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Collision for tower structure -->
+      <collision name="collision">
+        <pose>0 0 1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.6 0.6 2</size>
+          </box>
+        </geometry>
+      </collision>
+      
+    </link>
+  </model>
+</sdf>

@@ -2,6 +2,9 @@
 
 `tello_ros` is a ROS2 driver for Tello and Tello EDU drones.
 
+> Note: this README contains historical notes for older ROS2 distros (Dashing/Eloquent).
+> For the current Humble + Gazebo Sim (`gz`) workflow in this repository, use the root [README](/Users/sebastian/Desarrollo/tello-ros2-gazebo/README.md).
+
 ## Packages
 
 There are 4 ROS packages:
@@ -84,7 +87,7 @@ The defaults work well for a single Tello drone.
 
 ### 1. Set up your Linux environment
 
-Set up a Ubuntu 18.04 box or VM. This should include ffmpeg 3.4.4 and OpenCV 3.2.
+Set up an Ubuntu 22.04 environment (recommended for ROS2 Humble).
 
 Also install asio:
 ~~~
@@ -93,7 +96,7 @@ sudo apt install libasio-dev
 
 ### 2. Set up your ROS environment
 
-[Install ROS2 Eloquent Elusor](https://index.ros.org/doc/ros2/Installation/) with the `ros-eloquent-desktop` option.
+[Install ROS2 Humble](https://docs.ros.org/en/humble/Installation.html) with the desktop option.
 
 If you install binaries, be sure to also install the 
 [development tools and ROS tools](https://github.com/ros2/ros2/wiki/Linux-Development-Setup#install-development-tools-and-ros-tools)
@@ -101,7 +104,7 @@ from the source installation instructions.
 
 Install these additional packages:
 ~~~
-sudo apt install ros-eloquent-cv-bridge ros-eloquent-camera-calibration-parsers
+sudo apt install ros-humble-cv-bridge ros-humble-camera-calibration-parsers
 ~~~
 
 ### 3. Install `tello_ros`
@@ -113,8 +116,8 @@ cd ~/tello_ros_ws/src
 git clone https://github.com/clydemcqueen/tello_ros.git
 git clone https://github.com/ptrmu/ros2_shared.git
 cd ..
-source /opt/ros/eloquent/setup.bash
-# If you didn't intall Gazebo, skip tello_gazebo while building:
+source /opt/ros/humble/setup.bash
+# If you didn't install Gazebo Sim, skip tello_gazebo while building:
 colcon build --event-handlers console_direct+ --packages-skip tello_gazebo
 ~~~
 

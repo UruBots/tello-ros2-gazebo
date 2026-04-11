@@ -1,0 +1,242 @@
+<?xml version="1.0" ?>
+<!--
+  FIRA Air - Tall Building Model
+  Target 3 for victim search mission
+  2m high cuboid with QR codes containing victim information
+-->
+<sdf version="1.9">
+  <model name="tall_building">
+    <static>true</static>
+    <link name="link">
+      
+      <!-- Main building structure -->
+      <visual name="building_body">
+        <pose>0 0 1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.5 1.5 2</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.5 0.45 0.4 1</ambient>
+          <diffuse>0.6 0.55 0.5 1</diffuse>
+          <specular>0.2 0.2 0.2 1</specular>
+        </material>
+      </visual>
+      
+      <collision name="collision">
+        <pose>0 0 1 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.5 1.5 2</size>
+          </box>
+        </geometry>
+      </collision>
+      
+      <!-- Roof edge -->
+      <visual name="roof_edge">
+        <pose>0 0 2.02 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.6 1.6 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.3 0.3 1</ambient>
+          <diffuse>0.4 0.4 0.4 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Windows on each side -->
+      <!-- North face windows -->
+      <visual name="window_n1">
+        <pose>-0.4 0.751 1.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.4</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.3 0.5 1</ambient>
+          <diffuse>0.3 0.4 0.6 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="window_n2">
+        <pose>0.4 0.751 1.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.4</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.3 0.5 1</ambient>
+          <diffuse>0.3 0.4 0.6 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="window_n3">
+        <pose>0 0.751 0.7 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.4</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.3 0.5 1</ambient>
+          <diffuse>0.3 0.4 0.6 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- QR code on North face (victim info) -->
+      <visual name="qr_north_bg">
+        <pose>0 0.752 1.2 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.22 0.001 0.22</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="qr_north_pattern">
+        <pose>0 0.753 1.2 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.001 0.18</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- South face windows -->
+      <visual name="window_s1">
+        <pose>-0.4 -0.751 1.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.4</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.3 0.5 1</ambient>
+          <diffuse>0.3 0.4 0.6 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="window_s2">
+        <pose>0.4 -0.751 0.7 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.4</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.2 0.3 0.5 1</ambient>
+          <diffuse>0.3 0.4 0.6 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- QR code on South face -->
+      <visual name="qr_south_bg">
+        <pose>0 -0.752 0.8 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.22 0.001 0.22</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="qr_south_pattern">
+        <pose>0 -0.753 0.8 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.001 0.18</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- QR code on East face -->
+      <visual name="qr_east_bg">
+        <pose>0.752 0 1.0 0 0 1.5707</pose>
+        <geometry>
+          <box>
+            <size>0.22 0.001 0.22</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="qr_east_pattern">
+        <pose>0.753 0 1.0 0 0 1.5707</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.001 0.18</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- QR code on West face -->
+      <visual name="qr_west_bg">
+        <pose>-0.752 0 1.4 0 0 -1.5707</pose>
+        <geometry>
+          <box>
+            <size>0.22 0.001 0.22</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="qr_west_pattern">
+        <pose>-0.753 0 1.4 0 0 -1.5707</pose>
+        <geometry>
+          <box>
+            <size>0.18 0.001 0.18</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.1 1</ambient>
+          <diffuse>0.15 0.15 0.15 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Door on South face -->
+      <visual name="door">
+        <pose>0 -0.751 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.4 0.001 1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.2 0.15 1</ambient>
+          <diffuse>0.4 0.3 0.2 1</diffuse>
+        </material>
+      </visual>
+      
+    </link>
+  </model>
+</sdf>

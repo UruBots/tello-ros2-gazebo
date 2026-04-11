@@ -1,49 +1,65 @@
-"""Simulate a Tello drone"""
+"""Simulate one Tello drone in gz sim."""
 
 import os
 
 from ament_index_python.packages import get_package_share_directory
-from launch import LaunchDescription
-from launch_ros.actions import Node
-from launch.actions import ExecuteProcess
 from ament_index_python import get_package_prefix
+from launch import LaunchDescription
+from launch.actions import IncludeLaunchDescription, SetEnvironmentVariable, TimerAction
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from launch_ros.actions import Node
 
-# Add tello_description/share to GAZEBO_MODEL_PATH
-pkg_share_path = os.pathsep + os.path.join(get_package_prefix("tello_description"), 'share')
-print("pkg share", pkg_share_path)
-if 'GAZEBO_MODEL_PATH' in os.environ:
-    os.environ['GAZEBO_MODEL_PATH'] += pkg_share_path
-else:
-    os.environ['GAZEBO_MODEL_PATH'] =  pkg_share_path
+
+def _resource_paths():
+    tello_gazebo_share = get_package_share_directory("tello_gazebo")
+    tello_description_share = os.path.join(get_package_prefix("tello_description"), "share", "tello_description")
+    return [
+        os.path.join(tello_gazebo_share, "models"),
+        os.path.join(tello_description_share, "meshes"),
+    ]
+
 
 def generate_launch_description():
-    ns = 'drone1'
-    world_path = os.path.join(get_package_share_directory('tello_gazebo'), 'worlds', 'simple.world')
-    urdf_path = os.path.join(get_package_share_directory('tello_description'), 'urdf', 'tello_1.urdf')
+    ns = "drone1"
+    tello_gazebo_share = get_package_share_directory("tello_gazebo")
+    world_path = os.path.join(tello_gazebo_share, "worlds", "simple.world")
+    urdf_path = os.path.join(get_package_share_directory("tello_description"), "urdf", "tello_1.urdf")
 
-    return LaunchDescription([
-        # Launch Gazebo, loading tello.world
-        ExecuteProcess(cmd=[
-            'gazebo',
-            '--verbose',
-            '-s', 'libgazebo_ros_init.so',  # Publish /clock
-            '-s', 'libgazebo_ros_factory.so',  # Provide gazebo_ros::Node
-            world_path
-        ], output='screen'),
+    gz_resource_path = os.pathsep.join(_resource_paths())
 
-        # Spawn tello.urdf
-        Node(package='tello_gazebo', executable='inject_entity.py', output='screen',
-             arguments=[urdf_path, '0', '0', '1', '0']),
+    gz_sim = IncludeLaunchDescription(
+        PythonLaunchDescriptionSource(
+            os.path.join(get_package_share_directory("ros_gz_sim"), "launch", "gz_sim.launch.py")
+        ),
+        launch_arguments={"gz_args": f"-r {world_path}"}.items(),
+    )
 
-        # Publish static transforms
-        Node(package='robot_state_publisher', executable='robot_state_publisher', output='screen',
-             arguments=[urdf_path]),
+    spawn_tello = Node(
+        package="ros_gz_sim",
+        executable="create",
+        output="screen",
+        arguments=["-name", ns, "-file", urdf_path, "-x", "0", "-y", "0", "-z", "1", "-Y", "0"],
+    )
 
-        # Joystick driver, generates /namespace/joy messages
-        Node(package='joy', executable='joy_node', output='screen',
-             namespace=ns),
-
-        # Joystick controller, generates /namespace/cmd_vel messages
-        Node(package='tello_driver', executable='tello_joy_main', output='screen',
-             namespace=ns),
-    ])
+    return LaunchDescription(
+        [
+            SetEnvironmentVariable(name="GZ_SIM_RESOURCE_PATH", value=gz_resource_path),
+            gz_sim,
+            Node(
+                package="ros_gz_bridge",
+                executable="parameter_bridge",
+                output="screen",
+                arguments=["/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock"],
+            ),
+            TimerAction(period=2.0, actions=[spawn_tello]),
+            Node(
+                package="robot_state_publisher",
+                executable="robot_state_publisher",
+                output="screen",
+                parameters=[{"use_sim_time": True}],
+                arguments=[urdf_path],
+            ),
+            Node(package="joy", executable="joy_node", output="screen", namespace=ns),
+            Node(package="tello_driver", executable="tello_joy_main", output="screen", namespace=ns),
+        ]
+    )

@@ -1,10 +1,19 @@
+"""Legacy launch entrypoint kept for compatibility."""
+
 from launch import LaunchDescription
-import launch_ros.actions
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
+from ament_index_python.packages import get_package_share_directory
+import os
+
 
 def generate_launch_description():
-    return LaunchDescription([
-        launch_ros.actions.Node(
-            namespace= "tello_gazebo", package='tello_gazebo', executable='inject_entity.py', output='screen'),
-        launch_ros.actions.Node(
-            namespace= "limo_gazebo", package='limo_description', executable='gazebo_models_diff.launch.py', output='screen'),
-    ])
+    return LaunchDescription(
+        [
+            IncludeLaunchDescription(
+                PythonLaunchDescriptionSource(
+                    os.path.join(get_package_share_directory("tello_gazebo"), "launch", "simple_launch.py")
+                )
+            )
+        ]
+    )

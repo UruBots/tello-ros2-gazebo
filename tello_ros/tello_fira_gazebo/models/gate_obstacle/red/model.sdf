@@ -1,0 +1,92 @@
+<?xml version="1.0" ?>
+<!--
+  FIRA Air - Red Gate Obstacle
+  Drone must fly OVER this barrier
+  Dimensions: 1.5m wide x 1m high x 10cm thick solid barrier
+-->
+<sdf version="1.9">
+  <model name="gate_red">
+    <static>true</static>
+    <link name="link">
+      
+      <!-- Solid red barrier -->
+      <visual name="barrier">
+        <pose>0 0 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.5 0.1 1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.8 0.0 0.0 1</ambient>
+          <diffuse>1.0 0.0 0.0 1</diffuse>
+          <specular>0.3 0.0 0.0 1</specular>
+        </material>
+      </visual>
+      
+      <collision name="collision">
+        <pose>0 0 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.5 0.1 1</size>
+          </box>
+        </geometry>
+      </collision>
+      
+      <!-- Warning stripes -->
+      <visual name="stripe_1">
+        <pose>-0.5 0.051 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.8</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="stripe_2">
+        <pose>0 0.051 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.8</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="stripe_3">
+        <pose>0.5 0.051 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.3 0.001 0.8</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Top edge marker -->
+      <visual name="top_edge">
+        <pose>0 0 0.98 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.5 0.12 0.04</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.3 0.0 0.0 1</ambient>
+          <diffuse>0.4 0.0 0.0 1</diffuse>
+        </material>
+      </visual>
+      
+    </link>
+  </model>
+</sdf>

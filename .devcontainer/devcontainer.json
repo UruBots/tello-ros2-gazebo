@@ -1,0 +1,45 @@
+{
+  "name": "tello-ros2-gazebo",
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": "..",
+    "options": [
+      "--platform=linux/amd64"
+    ]
+  },
+  "platform": "linux/amd64",
+  "overrideCommand": false,
+  "remoteUser": "root",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {}
+  },
+  "runArgs": [
+    "--network=host",
+    "-p",
+    "6080:80",
+    "-p",
+    "5900:5901"
+  ],
+  "forwardPorts": [6080, 5900],
+  "containerEnv": {
+    "QT_X11_NO_MITSHM": "1",
+    "LIBGL_ALWAYS_INDIRECT": "1"
+  },
+  "remoteEnv": {
+    "VSCODE_AGENT_FOLDER": "/vscode/vscode-server"
+  },
+  "postCreateCommand": "sudo rosdep update || true",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash"
+      },
+      "extensions": [
+        "ms-iot.vscode-ros",
+        "ms-vscode.cpptools-extension-pack",
+        "ms-python.python"
+      ]
+    }
+  },
+  "mounts": []
+}

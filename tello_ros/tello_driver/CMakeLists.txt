@@ -21,8 +21,8 @@ if ($ENV{CLION_IDE})
   set(tello_msgs_DIR "${PROJECT_SOURCE_DIR}/../../../install/tello_msgs/share/tello_msgs/cmake")
   set(ros2_shared_DIR "${PROJECT_SOURCE_DIR}/../../../install/ros2_shared/share/ros2_shared/cmake")
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DRUN_INSIDE_CLION")
-  set(FastRTPS_INCLUDE_DIR "/opt/ros/foxy/include")
-  set(FastRTPS_LIBRARY_RELEASE "/opt/ros/foxy/lib/libfastrtps.so")
+  set(FastRTPS_INCLUDE_DIR "/opt/ros/humble/include")
+  set(FastRTPS_LIBRARY_RELEASE "/opt/ros/humble/lib/libfastrtps.so")
 endif ()
 
 # Asio requires threading
@@ -152,19 +152,18 @@ if (NOT WIN32)
 endif ()
 
 #=============
-# Tello driver main, statically linked to make IDE debugging easier
+# Tello driver main
+# Link against tello_driver_node to avoid recompiling heavy sources twice.
 #=============
 
 add_executable(tello_driver_main
-  src/tello_driver_main.cpp
-  ${DRIVER_NODE_SOURCES})
+  src/tello_driver_main.cpp)
 
 ament_target_dependencies(tello_driver_main
   ${DRIVER_NODE_DEPS})
 
-# Can't find_package(ffmpeg), so ament_target_dependencies won't work
 target_link_libraries(tello_driver_main
-  ${DRIVER_NODE_LIBS})
+  tello_driver_node)
 
 # Tell Asio to use std::, not boost::
 target_compile_definitions(tello_driver_main
@@ -172,15 +171,18 @@ target_compile_definitions(tello_driver_main
   PRIVATE ASIO_HAS_STD_CHRONO)
 
 #=============
-# Tello joy main, statically linked to make IDE debugging easier
+# Tello joy main
+# Link against tello_joy_node to avoid recompiling the node source.
 #=============
 
 add_executable(tello_joy_main
-  src/tello_joy_main.cpp
-  ${JOY_NODE_SOURCES})
+  src/tello_joy_main.cpp)
 
 ament_target_dependencies(tello_joy_main
   ${JOY_NODE_DEPS})
+
+target_link_libraries(tello_joy_main
+  tello_joy_node)
 
 #=============
 # Install

@@ -1,0 +1,139 @@
+<?xml version="1.0" ?>
+<!--
+  FIRA Air - Yellow Gate Obstacle
+  Drone must fly THROUGH this gate (under the top bar)
+  Dimensions: 1.5m wide x 1m high x 10cm thick pillars
+-->
+<sdf version="1.9">
+  <model name="gate_yellow">
+    <static>true</static>
+    <link name="link">
+      
+      <!-- Left pillar -->
+      <visual name="pillar_left">
+        <pose>-0.75 0 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.9 0.9 0.0 1</ambient>
+          <diffuse>1.0 1.0 0.0 1</diffuse>
+          <specular>0.5 0.5 0.0 1</specular>
+        </material>
+      </visual>
+      
+      <collision name="collision_left">
+        <pose>-0.75 0 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 1</size>
+          </box>
+        </geometry>
+      </collision>
+      
+      <!-- Right pillar -->
+      <visual name="pillar_right">
+        <pose>0.75 0 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.9 0.9 0.0 1</ambient>
+          <diffuse>1.0 1.0 0.0 1</diffuse>
+          <specular>0.5 0.5 0.0 1</specular>
+        </material>
+      </visual>
+      
+      <collision name="collision_right">
+        <pose>0.75 0 0.5 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 1</size>
+          </box>
+        </geometry>
+      </collision>
+      
+      <!-- Top bar -->
+      <visual name="top_bar">
+        <pose>0 0 0.95 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.6 0.1 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.9 0.9 0.0 1</ambient>
+          <diffuse>1.0 1.0 0.0 1</diffuse>
+          <specular>0.5 0.5 0.0 1</specular>
+        </material>
+      </visual>
+      
+      <collision name="collision_top">
+        <pose>0 0 0.95 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1.6 0.1 0.1</size>
+          </box>
+        </geometry>
+      </collision>
+      
+      <!-- Decorative stripes on pillars -->
+      <visual name="stripe_left_1">
+        <pose>-0.75 0.051 0.3 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.001 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="stripe_left_2">
+        <pose>-0.75 0.051 0.6 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.001 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="stripe_right_1">
+        <pose>0.75 0.051 0.3 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.001 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+      
+      <visual name="stripe_right_2">
+        <pose>0.75 0.051 0.6 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.08 0.001 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0 0 0 1</ambient>
+          <diffuse>0 0 0 1</diffuse>
+        </material>
+      </visual>
+      
+    </link>
+  </model>
+</sdf>

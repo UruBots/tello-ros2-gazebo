@@ -16,13 +16,11 @@
     <author>Peter Mullen</author>
 
     <buildtool_depend>ament_cmake</buildtool_depend>
-    <build_depend>rclcpp</build_depend>
-    <build_depend>rclcpp_components</build_depend>
-
     <depend>camera_calibration_parsers</depend>
     <depend>class_loader</depend>
     <depend>cv_bridge</depend>
-    <!--<depend>rclcpp</depend>-->
+    <depend>rclcpp</depend>
+    <depend>rclcpp_components</depend>
     <depend>geometry_msgs</depend>
     <depend>ros2_shared</depend>
     <depend>sensor_msgs</depend>

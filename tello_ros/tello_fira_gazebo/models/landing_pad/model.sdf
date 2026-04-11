@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!--
+  FIRA Air - Landing Pad Model
+  1m x 1m landing pad with blue background and white H symbol
+-->
+<sdf version="1.9">
+  <model name="landing_pad">
+    <static>true</static>
+    <link name="link">
+      
+      <!-- Blue base pad -->
+      <visual name="pad_base">
+        <pose>0 0 0.001 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1 1 0.002</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.1 0.1 0.7 1</ambient>
+          <diffuse>0.2 0.2 0.8 1</diffuse>
+          <specular>0.3 0.3 0.4 1</specular>
+        </material>
+      </visual>
+      
+      <!-- White H - Left vertical bar -->
+      <visual name="h_left">
+        <pose>-0.25 0 0.003 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.6 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- White H - Right vertical bar -->
+      <visual name="h_right">
+        <pose>0.25 0 0.003 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.6 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- White H - Horizontal bar -->
+      <visual name="h_bar">
+        <pose>0 0 0.003 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.6 0.1 0.001</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>1.0 1.0 1.0 1</ambient>
+          <diffuse>1.0 1.0 1.0 1</diffuse>
+        </material>
+      </visual>
+      
+      <!-- Collision for landing detection -->
+      <collision name="collision">
+        <pose>0 0 0.001 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>1 1 0.01</size>
+          </box>
+        </geometry>
+        <surface>
+          <friction>
+            <ode>
+              <mu>100</mu>
+              <mu2>50</mu2>
+            </ode>
+          </friction>
+        </surface>
+      </collision>
+      
+    </link>
+  </model>
+</sdf>
